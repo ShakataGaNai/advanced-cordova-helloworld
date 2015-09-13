@@ -7,10 +7,38 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
+        <script type="text/javascript" src="lib/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
         <title>Advanced Hello World</title>
     </head>
     <body>
-
+      <!-- Dataroles: https://learn.jquery.com/jquery-mobile/getting-started/ -->
+      <div data-role="page">
+        <!-- Fixed toolbars: http://view.jquerymobile.com/master/demos/toolbar-fixed/ -->
+        <div data-role="header" data-position="fixed">Header!</div>
+        <div data-role="content" style="margin-top:-1em;">
+            <div id="wherearewe">Where are we?</div>
+            <hr>
+            <div id="theform">
+              <form id="formme" method="post" action="">
+                <label for="language">Select a language:</label>
+                <select id="language">
+                  <option value="random" selected="true">Random Language</option>
+                  <option value="english">English</option>
+                  <option value="chinese">Chinese</option>
+                  <option value="german">German</option>
+                </select>
+                <input type="submit" id="submitbtn" value="Submit">
+              </form>
+              <div id="results">
+                Results as follows:
+                <ul data-role="listview" data-inset="true" data-filter="true"></ul>
+              </div>
+            </div>
+        </div><!--End content-->
+        <div data-role="footer" data-position="fixed">Footer!</div>
+      </div><!--End page-->
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
