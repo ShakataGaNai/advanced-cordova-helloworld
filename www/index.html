@@ -17,8 +17,10 @@
       <div data-role="page">
         <!-- Fixed toolbars: http://view.jquerymobile.com/master/demos/toolbar-fixed/ -->
         <div data-role="header" data-position="fixed">Header!</div>
-        <div data-role="content" style="margin-top:-1em;">
-            <div id="wherearewe">Where are we?</div>
+        <div data-role="content">
+            <div id="wherearewe">Where are we?
+            <!--This div will be populated by the geolocation plugin-->
+            </div>
             <hr>
             <div id="theform">
               <form id="formme" method="post" action="">
@@ -28,12 +30,22 @@
                   <option value="english">English</option>
                   <option value="chinese">Chinese</option>
                   <option value="german">German</option>
+                  <option value="Dutch">Dutch</option>
+                  <option value="French">French</option>
+                  <option value="Greek">Greek</option>
+                  <option value="Italian">Italian</option>
+                  <option value="Japanese">Japanese</option>
+                  <option value="Korean">Korean</option>
+                  <option value="Portuguese">Portuguese</option>
+                  <option value="Russian">Russian</option>
+                  <option value="Spanish">Spanish</option>
                 </select>
                 <input type="submit" id="submitbtn" value="Submit">
               </form>
               <div id="results">
                 Results as follows:
-                <ul data-role="listview" data-inset="true" data-filter="true"></ul>
+                <ul data-role="listview" data-inset="true" data-filter="true">
+                <!--This UL will be populated by Javascript--></ul>
               </div>
             </div>
         </div><!--End content-->

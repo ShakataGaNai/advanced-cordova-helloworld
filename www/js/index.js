@@ -9,7 +9,10 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
+        // Most plugins require you wait till deviceReady, so we'll init them here
+
         // Uses cordova-plugin-statusbar to keep the mobile OS status bar.
+        // Otherwise you end up with this: http://stackoverflow.com/questions/32514772/jquery-mobile-with-cordova-header-overlapping-with-ios-status-bar
         StatusBar.overlaysWebView(false);
         StatusBar.backgroundColorByHexString("#333");
 
@@ -28,7 +31,8 @@ app.initialize();
 // Use cordova-plugin-geolocation for GPS information
 // Display information into the webview
 var onSuccess = function(position) {
-    $('#wherearewe').html('<pre>-You are at-\n'+
+  // Based of of example: https://github.com/apache/cordova-plugin-geolocation
+  $('#wherearewe').html('<pre>-You are at-\n'+
           'Latitude: '          + position.coords.latitude          + '\n' +
           'Longitude: '         + position.coords.longitude         + '\n' +
           'Altitude: '          + position.coords.altitude          + '\n' +
@@ -47,8 +51,12 @@ function onError(error) {
 
 // Take the form and make an ajax request instead
 $('#formme').submit(function(){
+
+  // Fetch the data from the requisit fields
   var data = {"lang": $('#formme #language').val()};
-  //alert(JSON.stringify(data));
+
+  // Formulate the AJAX request
+  // Per http://api.jquery.com/jquery.ajax/
   console.log("sumitting data");
   $.ajax({
     type       : "POST",
@@ -57,17 +65,21 @@ $('#formme').submit(function(){
     url        : "https://i5mjyjbny3.execute-api.us-west-2.amazonaws.com/prod/randomHelloWorld",
     crossDomain: true,
     beforeSend : function() {
+      // Shows loading spinner & disables "Submit" button
       $.mobile.loading('show');
       $('#formme #submitbtn').prop("disabled",true);
     },
     complete   : function() {
+      // Hides loading spinner & re-enables "Submit" button
       $.mobile.loading('hide');
       $('#formme #submitbtn').prop("disabled",false);
     },
+    // Our server side needs JSON
     data       : JSON.stringify(data),
     contentType: "application/json; charset=utf-8",
     dataType   : 'json',
     success    : function(response) {
+        // Take the results from the server and shove it into the DOM
         $('#results ul').prepend("<li>"+response[0]+"="+response[1]+"\</li>\n");
     },
     error      : function() {
